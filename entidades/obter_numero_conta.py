@@ -41,4 +41,6 @@ def detecta_number_conta(antiga, nova):
 	elif (u'conta' in nova[u'entities']):
 		antiga[u'entities'][u'numero_conta'] = nova[u'entities'][u'conta']
 		antiga[u'entities'][u'numero_conta'][0][u'value'] = str(antiga[u'entities'][u'numero_conta'][0][u'value'])
+	elif (u'conta_anterior' in nova[u'entities']):
+		antiga[u'entities'][u'numero_conta'] = conversas.busca(u'numero_conta')
 	return antiga
