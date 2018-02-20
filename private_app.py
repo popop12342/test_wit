@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-
+import wit
 from wit import Wit
 from reconhece import reconhece, get_intencao
 import Cancelar
@@ -24,7 +24,8 @@ def iniciar():
 			print("\nO que você gostaria de fazer hoje?")
 			resposta = reconhece(cliente, modo)
 			intencao = get_intencao(resposta)
-			
+
+			resposta[u'_text'] = [resposta[u'_text']]
 			
 			if (intencao == "get_saldo"):
 				get_saldo(resposta)
@@ -49,6 +50,9 @@ def iniciar():
 
 		except Cancelar.Cancelar:
 			continue
+
+		except wit.wit.WitError:
+			print("Não compreendi o que você disse")
 
 
 if (__name__ == "__main__"):

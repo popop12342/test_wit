@@ -7,6 +7,8 @@ import conversas
 def busca_entidades(principal, antiga, nova, entidades=[]):
 	for entidade in entidades:
 		if (entidade in nova[u'entities']):
+			antiga[u'_text'].append(nova[u'_text'])
+
 			antiga[u'entities'][principal] = nova[u'entities'].pop(entidade)
 			return antiga[u'entities'][principal][0][u'value']
 

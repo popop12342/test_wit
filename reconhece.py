@@ -7,7 +7,7 @@ def reconhece(cliente, modo):
 		resposta = reconhece_texto(cliente)
 	else:
 		resposta = reconhece_voz(cliente)
-	
+
 	return resposta
 
 
