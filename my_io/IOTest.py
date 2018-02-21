@@ -1,4 +1,4 @@
-from IOManager import IOManager
+from my_io.IOManager import IOManager
 
 class IOTest(IOManager):
 
