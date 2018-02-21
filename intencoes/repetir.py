@@ -7,23 +7,23 @@ from intencoes.transferir import transferir
 from intencoes.get_extrato import get_extrato
 from intencoes.aplicacao import criar, aplicar
 
-def repetir(resposta, cliente, modo):
+def repetir(io, resposta, cliente, modo):
 	conversas = carrega()
 
 	ultima = conversas.pop()
 	intencao = ultima[u'entities'][u'intent'][0][u'value']
 
 	if (intencao == "get_saldo"):
-		get_saldo(ultima)
+		get_saldo(io, ultima)
 	elif (intencao == "pagar"):
-		pagar(ultima)
+		pagar(io, ultima)
 	elif (intencao == "get_limite"):
-		get_limite(ultima)
+		get_limite(io, ultima)
 	elif (intencao == "transferir"):
-		transferir(ultima, cliente, modo)
+		transferir(io, ultima, cliente, modo)
 	elif (intencao == "extrato"):
-		get_extrato(ultima)
+		get_extrato(io, ultima)
 	elif (intencao == "criar_aplicacao"):
-		criar(ultima, cliente, modo)
+		criar(io, ultima, cliente, modo)
 	elif (intencao == "aplicar"):
-		aplicar(ultima, cliente, modo)
+		aplicar(io, ultima, cliente, modo)
