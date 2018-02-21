@@ -16,6 +16,7 @@ def carrega():
 
 	return conversas
 
+# Busca e retorna a entidade mais recente
 def busca(entidade):
 	conversas = carrega()
 

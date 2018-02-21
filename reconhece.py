@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from recorder import record_audio, read_audio
 
+# seleciona o tipo de reconhecimento, voz ou texto
 def reconhece(io, cliente, modo):
 	resposta = {}
 	if (modo == "1"):
