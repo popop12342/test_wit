@@ -2,7 +2,7 @@ from my_io.IOManager import IOManager
 
 class IOTest(IOManager):
 
-    def __init__(self, mensagens):
+    def __init__(self, mensagens=[]):
         self.mensagens = mensagens
         self.impressoes = []
 

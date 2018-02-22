@@ -6,7 +6,7 @@ from entidades.obter_numero_conta import obter_numero_conta
 class TestObterNumeroConta(unittest.TestCase):
 
     def setUp(self):
-        self.io = IOTest([])
+        self.io = IOTest()
         self.cliente = Wit("EGYXBUP5MBO2C3FH67L6IP2JNZ3DLRCW")
         self.modo = "1"
 
@@ -20,7 +20,7 @@ class TestObterNumeroConta(unittest.TestCase):
         self.io.mensagens = ["399301"]
         numero_conta = obter_numero_conta(io=self.io, resposta=resposta, cliente=self.cliente, modo=self.modo)
         self.assertEqual(numero_conta, 399301)
-        self.assertEqual(self.io.impressoes[0], "Diga o numero da conta")
+        self.assertEqual(self.io.impressoes[0], "Diga o número da conta")
 
     def test_numero_fornecido_futuramente(self):
         resposta = {'_text': ['transferir'], 'entities': {'intent': [{'confidence': 0.999996102388, 'value': 'transferir'}]}, 'msg_id': '0FaTzFtaBI9mEE9dB'}
@@ -28,5 +28,5 @@ class TestObterNumeroConta(unittest.TestCase):
         numero_conta = obter_numero_conta(io=self.io, resposta=resposta, cliente=self.cliente, modo=self.modo)
         self.assertEqual(numero_conta, 399011)
         for impressao in self.io.impressoes:
-            self.assertEqual(impressao, "Diga o numero da conta")
+            self.assertEqual(impressao, "Diga o número da conta")
         self.assertEqual(len(self.io.impressoes), 3)

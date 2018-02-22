@@ -15,7 +15,7 @@ def obter_numero_conta(io, resposta, cliente, modo):
 
 	# Se o numero não foi inicialment fornecido
 	while (numero_conta == "nao encontrado"):
-		io.imprime("Diga o numero da conta")
+		io.imprime("Diga o número da conta")
 		resposta_numero_conta = reconhece(io, cliente, modo)
 		resposta_numero_conta = numero_falado(resposta_numero_conta, cliente, modo)
 		validacoes.cancelar_check(resposta_numero_conta)

@@ -6,7 +6,7 @@ from my_io.IOTest import IOTest
 class TestObterValor(unittest.TestCase):
 
     def setUp(self):
-        self.io = IOTest([])
+        self.io = IOTest()
         self.cliente = Wit("EGYXBUP5MBO2C3FH67L6IP2JNZ3DLRCW")
         self.modo = "1"
 

@@ -10,5 +10,5 @@ def transferir(io, resposta, cliente, modo):
 	numero_conta = obter_numero_conta(io=io, resposta=resposta, cliente=cliente, modo=modo)
 	valor = obter_valor(io=io, resposta=resposta, cliente=cliente, modo=modo)
 	
-	io.imprime("Transferindo {} R$ para a conta {}".format(valor, numero_conta))
+	io.imprime("Transferindo {} R$ para a conta {:06d}".format(valor, numero_conta))
 	salva(resposta)

@@ -1,8 +1,9 @@
 # -*- coding: utf-8 -*-
+import codecs
 from estrutura_dados.pilha import Pilha
 
 def salva(resposta):
-	f = open("conversas.txt", 'a')
+	f = codecs.open("conversas.txt", 'a', encoding="utf-8")
 	f.write(str(resposta))
 	f.write("\n")
 	f.close()
