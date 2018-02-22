@@ -1,13 +1,11 @@
 import unittest
 import datetime
-from wit import Wit
 from exemplo_banco import iniciar
 from my_io.IOTest import IOTest
 
 class TestPagar(unittest.TestCase):
 
     def setUp(self):
-        self.cliente = Wit("EGYXBUP5MBO2C3FH67L6IP2JNZ3DLRCW")
         self.io = IOTest()
         self.modo = "1"
         self.que_fazer = '\nO que você gostaria de fazer hoje?'
