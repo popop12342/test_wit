@@ -1,21 +1,23 @@
 # -*- coding: utf-8 -*-
+import codecs
 from estrutura_dados.pilha import Pilha
 
 def salva(resposta):
-	f = open("conversas.txt", 'a')
+	f = codecs.open("conversas.txt", 'a', encoding="utf-8")
 	f.write(str(resposta))
 	f.write("\n")
 	f.close()
 
 def carrega():
 	conversas = Pilha()
-	with open("conversas.txt") as f:
+	with codecs.open("conversas.txt",encoding="utf-8") as f:
 		for linha in f:
 			conversa = eval(linha)
 			conversas.push(conversa)
 
 	return conversas
 
+# Busca e retorna a entidade mais recente
 def busca(entidade):
 	conversas = carrega()
 

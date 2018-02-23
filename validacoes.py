@@ -13,25 +13,26 @@ def numero_conta_valido(numero_conta):
 	return valido
 
 
-# Joga uma exeção se o usuário cancelar a operação de transferir
+# Joga uma exeção se o usuário cancelar uma operação
 def cancelar_check(resposta):
 	if (not u'intent' in resposta[u'entities']):
 		return
 	if (resposta[u'entities'][u'intent'][0][u'value'] == "cancelar"):
 		raise Cancelar.Cancelar()
 
-# substitui numeros escritos por dígitos
+# substitui numeros escritos por dígitos (apenas de zero a nove)
 def formata_numero(resposta):
 	numeros = ["zero", "um", "dois", "três", "quatro", "cinco", "seis", "sete", "oito", "nove"]
 
 	texto = resposta[u'_text']
 	palavras = texto.split()
 
-	
+	# Substitui a palavra com um número conrrespondente
 	for i in range(len(palavras)):
 		if (palavras[i] in numeros):
 			palavras[i] = str(numeros.index(palavras[i]))
 	
+	# Elimina espaços entre números
 	palavras_novas = []
 	prev = "0"
 	for palavra in palavras:
