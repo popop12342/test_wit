@@ -6,7 +6,7 @@ class IOTest(IOManager):
         self.mensagens = mensagens
         self.impressoes = []
 
-    def le(self):
+    def le(self, text=None):
         return self.mensagens.pop(0)
 
     def imprime(self, text):

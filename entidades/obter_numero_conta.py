@@ -27,7 +27,7 @@ def obter_numero_conta(io, resposta, cliente, modo):
 # Caso o usuário diga o número dígito a dígito
 # Ex: "conta um dois três quatro"
 def numero_falado(resposta, cliente, modo):
-	if (modo == "2"):
+	if (modo == "2" and u'number' in resposta[u'entities']):
 		resposta = validacoes.formata_numero(resposta)
 		resposta = cliente.message(resposta['_text'])
 	return resposta

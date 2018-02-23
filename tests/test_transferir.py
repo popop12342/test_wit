@@ -20,17 +20,30 @@ class TestTransferir(unittest.TestCase):
     def test_detecta_transferir_sem_valor(self):
         self.io.mensagens = [self.modo, "transfira para a conta 399201", "50", "cancelar"]
         iniciar(self.io)
-        self.esperado.extend(["Diga o valor", "Transferindo 50 R$ para a conta 399201", self.que_fazer])
+        self.esperado.extend([
+            "Diga o valor", 
+            "Transferindo 50 R$ para a conta 399201", 
+            self.que_fazer
+        ])
         self.assertEqual(self.io.impressoes, self.esperado)
 
     def test_detecta_transferir_sem_conta(self):
         self.io.mensagens = [self.modo, "transferir 60 reais", "003229", "cancelar"]
         iniciar(self.io)
-        self.esperado.extend(["Diga o número da conta", "Transferindo 60 R$ para a conta 003229", self.que_fazer])
+        self.esperado.extend([
+            "Diga o número da conta", 
+            "Transferindo 60 R$ para a conta 003229", 
+            self.que_fazer
+        ])
         self.assertEqual(self.io.impressoes, self.esperado)
 
     def test_detecta_transferir_sem_parametros(self):
         self.io.mensagens = [self.modo, "transferir", "488290", "40 R$", "cancelar"]
         iniciar(self.io)
-        self.esperado.extend(["Diga o número da conta", "Diga o valor", "Transferindo 40 R$ para a conta 488290", self.que_fazer])
+        self.esperado.extend([
+            "Diga o número da conta", 
+            "Diga o valor", 
+            "Transferindo 40 R$ para a conta 488290", 
+            self.que_fazer
+        ])
         self.assertEqual(self.io.impressoes, self.esperado)

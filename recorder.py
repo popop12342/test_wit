@@ -26,7 +26,7 @@ def record_audio(RECORD_SECONDS, WAVE_OUTPUT_FILENAME):
     # list to save all audio frames
     frames = []
 
-    for i in range(int(RATE / CHUNK * RECORD_SECONDS)):
+    for _ in range(int(RATE / CHUNK * RECORD_SECONDS)):
         # read audio stream from microphone
         data = stream.read(CHUNK)
         # append audio data to frames list
