@@ -10,7 +10,7 @@ def salva(resposta):
 
 def carrega():
 	conversas = Pilha()
-	with open("conversas.txt") as f:
+	with codecs.open("conversas.txt",encoding="utf-8") as f:
 		for linha in f:
 			conversa = eval(linha)
 			conversas.push(conversa)
