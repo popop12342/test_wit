@@ -23,29 +23,29 @@ def iniciar(io):
 	while (True):
 		try:
 			io.imprime("\nO que você gostaria de fazer hoje?")
-			resposta = reconhece(io, cliente, modo)
-			intencao = get_intencao(resposta)
+			msg_analizada = reconhece(io, cliente, modo)
+			intencao = get_intencao(msg_analizada)
 
-			resposta[u'_text'] = [resposta[u'_text']]
+			msg_analizada[u'_text'] = [msg_analizada[u'_text']]
 			
 			if (intencao == "get_saldo"):
-				get_saldo(io, resposta)
+				get_saldo(io, msg_analizada)
 			elif (intencao == "pagar"):
-				pagar(io, resposta)
+				pagar(io, msg_analizada)
 			elif (intencao == "get_limite"):
-				get_limite(io, resposta)
+				get_limite(io, msg_analizada)
 			elif (intencao == "transferir"):
-				transferir(io, resposta, cliente, modo)
+				transferir(io, msg_analizada, cliente, modo)
 			elif (intencao == "extrato"):
-				get_extrato(io, resposta)
+				get_extrato(io, msg_analizada)
 			elif (intencao == "cancelar"):
 				break
 			elif (intencao == "criar_aplicacao"):
-				criar(io, resposta, cliente, modo)
+				criar(io, msg_analizada, cliente, modo)
 			elif (intencao == "aplicar"):
-				aplicar(io, resposta, cliente, modo)
+				aplicar(io, msg_analizada, cliente, modo)
 			elif (intencao == "repetir"):
-				repetir(io=io, resposta=resposta, cliente=cliente, modo=modo)
+				repetir(io=io, msg_analizada=msg_analizada, cliente=cliente, modo=modo)
 			else:
 				io.imprime("Não compreendi sua intenção")
 

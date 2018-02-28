@@ -3,20 +3,20 @@ from recorder import record_audio, read_audio
 
 # seleciona o tipo de reconhecimento, voz ou texto
 def reconhece(io, cliente, modo):
-	resposta = {}
+	msg_analizada = {}
 	if (modo == "1"):
-		resposta = reconhece_texto(io, cliente)
+		msg_analizada = reconhece_texto(io, cliente)
 	else:
-		resposta = reconhece_voz(io, cliente)
+		msg_analizada = reconhece_voz(io, cliente)
 
-	return resposta
+	return msg_analizada
 
 
 def reconhece_texto(io, cliente):
 	menssagem = io.le()
-	resposta = cliente.message(menssagem)
+	msg_analizada = cliente.message(menssagem)
 
-	return resposta
+	return msg_analizada
 
 
 def reconhece_voz(io, cliente):
@@ -33,12 +33,12 @@ def reconhece_voz(io, cliente):
 	# definindo header
 	header = {'Content-Type': 'audio/wav'}
 
-	resposta = cliente.speech(audio, None, header)
+	msg_analizada = cliente.speech(audio, None, header)
 
-	return resposta
+	return msg_analizada
 
 
-def get_intencao(resposta):
-	if (not u'intent' in resposta[u'entities']):
+def get_intencao(msg_analizada):
+	if (not u'intent' in msg_analizada[u'entities']):
 		return "nenhuma"
-	return resposta[u'entities'][u'intent'][0][u'value']
+	return msg_analizada[u'entities'][u'intent'][0][u'value']

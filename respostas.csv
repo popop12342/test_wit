@@ -1,0 +1,6 @@
+get_saldo,Seu saldo é de 10 R$,Saldo: 10 R$
+get_limite,Seu limite é de 100 R$,você está limitado a 100 R$,seu débito máximo é no valor de 100 R$
+get_extrato,Mostrando extrato,Compra1: 20R$/ Compra2: 30R$
+criar_aplicacao,Criando aplicação @nome_aplicacao,Criando aplicação chamada @nome_aplicacao,A aplicação @nome_aplicacao foi criada
+aplicar,Aplicando @valor R$ em @nome_aplicacao,Realizando uma aplicação de valor @valor R$ em @nome_aplicacao,A aplicação @nome_aplicacao recebeu @valor R$
+transferir,Transferindo para a conta @numero_conta o valor @valor R$,Transferindo @valor R$ para @numero_conta,Transferindo @valor R$ para a conta @numero_conta

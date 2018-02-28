@@ -1,4 +1,6 @@
 import unittest
+import random
+from respostas import get_respostas
 from exemplo_banco import iniciar
 from my_io.IOTest import IOTest
 
@@ -9,6 +11,7 @@ class TestEntidadeAnterior(unittest.TestCase):
         self.modo = "1"
         self.que_fazer = "\nO que você gostaria de fazer hoje?"
         self.esperado = ['Escolha a forma de interação:', "1) texto", "2) audio", self.que_fazer]
+        random.seed(0)
 
     def test_nome_aplicacao_anterior(self):
         self.io.mensagens = [
@@ -18,10 +21,18 @@ class TestEntidadeAnterior(unittest.TestCase):
             "cancelar"
         ]
         iniciar(self.io)
+
+        possiveis_respostas = get_respostas("criar_aplicacao")
+        random.seed(0)
+        resposta1 = random.choice(possiveis_respostas).replace("@nome_aplicacao", "faculdade")
+
+        possiveis_respostas = get_respostas("aplicar")
+        resposta2 = random.choice(possiveis_respostas).replace("@nome_aplicacao", "faculdade").replace("@valor", "30")
+
         self.esperado.extend([
-            "Criando aplicação faculdade", 
+            resposta1, 
             self.que_fazer, 
-            "Aplicando 30 R$ em faculdade", 
+            resposta2, 
             self.que_fazer
         ])
         self.assertEqual(self.io.impressoes, self.esperado)
@@ -36,12 +47,20 @@ class TestEntidadeAnterior(unittest.TestCase):
             "cancelar"
         ]
         iniciar(self.io)
+
+        random.seed(0)
+        possiveis_respostas = get_respostas("criar_aplicacao")
+        resposta1 = random.choice(possiveis_respostas).replace("@nome_aplicacao", "pé de meia")
+
+        possiveis_respostas = get_respostas("aplicar")
+        resposta2 = random.choice(possiveis_respostas).replace("@nome_aplicacao", "pé de meia").replace("@valor", "20")
+
         self.esperado.extend([
-            "Criando aplicação pé de meia", 
+            resposta1, 
             self.que_fazer, 
             "Diga o nome da aplicação", 
             "Diga o valor", 
-            "Aplicando 20 R$ em pé de meia", 
+            resposta2, 
             self.que_fazer
         ])
         self.assertEqual(self.io.impressoes, self.esperado)
@@ -54,28 +73,40 @@ class TestEntidadeAnterior(unittest.TestCase):
             "cancelar"
         ]
         iniciar(self.io)
+
+        random.seed(0)
+        possiveis_respostas = get_respostas("transferir")
+        resposta1 = random.choice(possiveis_respostas).replace("@numero_conta", "399200").replace("@valor", "40")
+        resposta2 = random.choice(possiveis_respostas).replace("@numero_conta", "399200").replace("@valor", "100")
+
         self.esperado.extend([
-            "Transferindo 40 R$ para a conta 399200", 
+            resposta1, 
             self.que_fazer, 
-            "Transferindo 100 R$ para a conta 399200", 
+            resposta2, 
             self.que_fazer
         ])
         self.assertEqual(self.io.impressoes, self.esperado)
 
     def test_numero_conta_anterior_etapas(self):
         self.io.mensagens = [
-            self.modo, 
+            self.modo,
             "transfira 100 reais para a conta 399203", 
             "transferir 50 reais", 
             "mesma conta", 
             "cancelar"
         ]
         iniciar(self.io)
+
+        random.seed(0)
+        possiveis_respostas = get_respostas("transferir")
+        resposta1 = random.choice(possiveis_respostas).replace("@numero_conta", "399203").replace("@valor", "100")
+        resposta2 = random.choice(possiveis_respostas).replace("@numero_conta", "399203").replace("@valor", "50")
+
         self.esperado.extend([
-            "Transferindo 100 R$ para a conta 399203", 
+            resposta1, 
             self.que_fazer, 
             "Diga o número da conta", 
-            "Transferindo 50 R$ para a conta 399203", 
+            resposta2, 
             self.que_fazer
         ])
         self.assertEqual(self.io.impressoes, self.esperado)
@@ -88,10 +119,18 @@ class TestEntidadeAnterior(unittest.TestCase):
             "cancelar"
         ]
         iniciar(self.io)
+
+        random.seed(0)
+        possiveis_respostas = get_respostas("aplicar")
+        resposta1 = random.choice(possiveis_respostas).replace("@nome_aplicacao", "viagem").replace("@valor", "50")
+
+        possiveis_respostas = get_respostas("transferir")
+        resposta2 = random.choice(possiveis_respostas).replace("@numero_conta", "499012").replace("@valor", "50")
+
         self.esperado.extend([
-            "Aplicando 50 R$ em viagem", 
+            resposta1, 
             self.que_fazer, 
-            "Transferindo 50 R$ para a conta 499012", 
+            resposta2, 
             self.que_fazer
         ])
         self.assertEqual(self.io.impressoes, self.esperado)
@@ -105,11 +144,19 @@ class TestEntidadeAnterior(unittest.TestCase):
             "cancelar"
         ]
         iniciar(self.io)
+
+        random.seed(0)
+        possiveis_respostas = get_respostas("transferir")
+        resposta1 = random.choice(possiveis_respostas).replace("@valor", "70").replace("@numero_conta", "399450")
+
+        possiveis_respostas = get_respostas("aplicar")
+        resposta2 = random.choice(possiveis_respostas).replace("@nome_aplicacao", "carro").replace("@valor", "70")
+
         self.esperado.extend([
-            "Transferindo 70 R$ para a conta 399450", 
+            resposta1, 
             self.que_fazer, 
             "Diga o valor", 
-            "Aplicando 70 R$ em carro", 
+            resposta2, 
             self.que_fazer
         ])
         self.assertEqual(self.io.impressoes, self.esperado)
@@ -122,10 +169,16 @@ class TestEntidadeAnterior(unittest.TestCase):
             "cancelar"
         ]
         iniciar(self.io)
+
+        random.seed(0)
+        possiveis_respostas = get_respostas("transferir")
+        resposta1 = random.choice(possiveis_respostas).replace("@numero_conta", "499200").replace("@valor", "100")
+        resposta2 = random.choice(possiveis_respostas).replace("@numero_conta", "499200").replace("@valor", "100")
+
         self.esperado.extend([
-            "Transferindo 100 R$ para a conta 499200", 
+            resposta1, 
             self.que_fazer, 
-            "Transferindo 100 R$ para a conta 499200", 
+            resposta2, 
             self.que_fazer
         ])
         self.assertEqual(self.io.impressoes, self.esperado)

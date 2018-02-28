@@ -7,7 +7,7 @@ from intencoes.transferir import transferir
 from intencoes.get_extrato import get_extrato
 from intencoes.aplicacao import criar, aplicar
 
-def repetir(io, resposta, cliente, modo):
+def repetir(io, msg_analizada, cliente, modo):
 	conversas = carrega()
 
 	ultima = conversas.pop()

@@ -14,17 +14,17 @@ def numero_conta_valido(numero_conta):
 
 
 # Joga uma exeção se o usuário cancelar uma operação
-def cancelar_check(resposta):
-	if (not u'intent' in resposta[u'entities']):
+def cancelar_check(msg_analizada):
+	if (not u'intent' in msg_analizada[u'entities']):
 		return
-	if (resposta[u'entities'][u'intent'][0][u'value'] == "cancelar"):
+	if (msg_analizada[u'entities'][u'intent'][0][u'value'] == "cancelar"):
 		raise Cancelar.Cancelar()
 
 # substitui numeros escritos por dígitos (apenas de zero a nove)
-def formata_numero(resposta):
+def formata_numero(msg_analizada):
 	numeros = ["zero", "um", "dois", "três", "quatro", "cinco", "seis", "sete", "oito", "nove"]
 
-	texto = resposta[u'_text']
+	texto = msg_analizada[u'_text']
 	palavras = texto.split()
 
 	# Substitui a palavra com um número conrrespondente
@@ -43,5 +43,5 @@ def formata_numero(resposta):
 		palavras_novas.append(palavra)
 		prev = palavra
 
-	resposta[u'_text'] = ''.join(palavras_novas)
-	return resposta
+	msg_analizada[u'_text'] = ''.join(palavras_novas)
+	return msg_analizada

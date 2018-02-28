@@ -2,9 +2,9 @@
 import codecs
 from estrutura_dados.pilha import Pilha
 
-def salva(resposta):
+def salva(msg_analizada):
 	f = codecs.open("conversas.txt", 'a', encoding="utf-8")
-	f.write(str(resposta))
+	f.write(str(msg_analizada))
 	f.write("\n")
 	f.close()
 

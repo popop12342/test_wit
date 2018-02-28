@@ -1,7 +1,7 @@
 # -*- coding:utf-8 -*-
 import conversas
 
-# Busca pelas entidades em resposta
+# Busca pelas entidades em msg_analizada
 # se encontrar copia essa entidade na entidade principal
 def busca_entidades(principal, antiga, nova, entidades=[]):
 	for entidade in entidades:
@@ -16,9 +16,9 @@ def busca_entidades(principal, antiga, nova, entidades=[]):
 
 
 # Checa se o usuário quer utilizar um valor anterior
-def checa_anterior(valor, valor_padrao, resposta, principal):
+def checa_anterior(valor, valor_padrao, msg_analizada, principal):
 	if (valor == valor_padrao):
 		entidade = conversas.busca(principal)
-		resposta[u'entities'][principal] = entidade
+		msg_analizada[u'entities'][principal] = entidade
 		return entidade[0][u'value']
 	return valor

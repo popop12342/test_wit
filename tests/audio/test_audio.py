@@ -1,4 +1,6 @@
 import unittest
+import random
+from respostas import get_respostas
 from exemplo_banco import iniciar
 from my_io.IOTest import IOTest
 from recorder import read_audio
@@ -10,23 +12,39 @@ class TestAudio(unittest.TestCase):
         self.modo = "2"
         self.que_fazer = "\nO que você gostaria de fazer hoje?"
         self.esperado = ['Escolha a forma de interação:', "1) texto", "2) audio", self.que_fazer]
+        random.seed(0)
 
     def test_saldo(self):
         self.io.mensagens = [self.modo, "wav/saldo.wav", "wav/cancelar.wav"]
         iniciar(self.io)
-        self.esperado.extend(["Seu saldo é de 10 R$", self.que_fazer])
+
+        random.seed(0)
+        possiveis_respostas = get_respostas("get_saldo")
+        resposta = random.choice(possiveis_respostas)
+
+        self.esperado.extend([resposta, self.que_fazer])
         self.assertEqual(self.io.impressoes, self.esperado)
 
     def test_extrato(self):
         self.io.mensagens = [self.modo, "wav/extrato.wav", "wav/cancelar.wav"]
         iniciar(self.io)
-        self.esperado.extend(["Mostrando extrato", self.que_fazer])
+
+        random.seed(0)
+        possiveis_respostas = get_respostas("get_extrato")
+        resposta = random.choice(possiveis_respostas)
+
+        self.esperado.extend([resposta, self.que_fazer])
         self.assertEqual(self.io.impressoes, self.esperado)
 
     def test_limite(self):
         self.io.mensagens = [self.modo, "wav/limite.wav", "wav/cancelar.wav"]
         iniciar(self.io)
-        self.esperado.extend(["Seu limite é de 100 R$", self.que_fazer])
+
+        random.seed(0)
+        possiveis_respostas = get_respostas("get_limite")
+        resposta = random.choice(possiveis_respostas)
+
+        self.esperado.extend([resposta, self.que_fazer])
         self.assertEqual(self.io.impressoes, self.esperado)
 
     @unittest.expectedFailure
@@ -39,7 +57,12 @@ class TestAudio(unittest.TestCase):
     def test_criar_aplicacao(self):
         self.io.mensagens = [self.modo, "wav/criar_aplicacao.wav", "wav/nome_aplicacao.wav", "wav/cancelar.wav"]
         iniciar(self.io)
-        self.esperado.extend(["Diga o nome da aplicação", "Criando aplicação viagem", self.que_fazer])
+
+        random.seed(0)
+        possiveis_respostas = get_respostas("criar_aplicacao")
+        resposta = random.choice(possiveis_respostas).replace("@nome_aplicacao", "viagem")
+
+        self.esperado.extend(["Diga o nome da aplicação", resposta, self.que_fazer])
         self.assertEqual(self.io.impressoes, self.esperado)
 
     def test_aplicar(self):
@@ -51,10 +74,15 @@ class TestAudio(unittest.TestCase):
             "wav/cancelar.wav"
         ]
         iniciar(self.io)
+
+        random.seed(0)
+        possiveis_respostas = get_respostas("aplicar")
+        resposta = random.choice(possiveis_respostas).replace("@nome_aplicacao", "viagem").replace("@valor", "50")
+
         self.esperado.extend([
             "Diga o nome da aplicação", 
             "Diga o valor", 
-            "Aplicando 50 R$ em viagem", 
+            resposta, 
             self.que_fazer
         ])
         self.assertEqual(self.io.impressoes, self.esperado)
@@ -68,10 +96,15 @@ class TestAudio(unittest.TestCase):
             "wav/cancelar.wav"
         ]
         iniciar(self.io)
+
+        random.seed(0)
+        possiveis_respostas = get_respostas("transferir")
+        resposta = random.choice(possiveis_respostas).replace("@numero_conta", "123456").replace("@valor", "50")
+
         self.esperado.extend([
             "Diga o número da conta", 
             "Diga o valor", 
-            "Transferindo 50 R$ para a conta 123456", 
+            resposta, 
             self.que_fazer
         ])
         self.assertEqual(self.io.impressoes, self.esperado)
@@ -88,14 +121,20 @@ class TestAudio(unittest.TestCase):
             "wav/cancelar.wav"
         ]
         iniciar(self.io)
+
+        random.seed(0)
+        possiveis_respostas = get_respostas("transferir")
+        resposta1 = random.choice(possiveis_respostas).replace("@numero_conta", "123456").replace("@valor", "50")
+        resposta2 = random.choice(possiveis_respostas).replace("@numero_conta", "123456").replace("@valor", "50")
+
         self.esperado.extend([
             "Diga o número da conta",
             "Diga o valor",
-            "Transferindo 50 R$ para a conta 123456",
+            resposta1,
             self.que_fazer,
             "Diga o número da conta", 
             "Diga o valor",
-            "Transferindo 50 R$ para a conta 123456",
+            resposta2,
             self.que_fazer
         ])
         self.assertEqual(self.io.impressoes, self.esperado)
@@ -112,14 +151,22 @@ class TestAudio(unittest.TestCase):
             "wav/cancelar.wav"
         ]
         iniciar(self.io)
+
+        random.seed(0)
+        possiveis_respostas = get_respostas("transferir")
+        resposta1 = random.choice(possiveis_respostas).replace("@numero_conta", "123456").replace("@valor", "50")
+
+        possiveis_respostas = get_respostas("aplicar")
+        resposta2 = random.choice(possiveis_respostas).replace("@valor", "50").replace("@nome_aplicacao", "viagem")
+
         self.esperado.extend([
             "Diga o número da conta",
             "Diga o valor",
-            "Transferindo 50 R$ para a conta 123456", 
+            resposta1, 
             self.que_fazer,
             "Diga o nome da aplicação",
             "Diga o valor", 
-            "Aplicando 50 R$ em viagem", 
+            resposta2, 
             self.que_fazer 
         ])
         self.assertEqual(self.io.impressoes, self.esperado)
@@ -136,13 +183,21 @@ class TestAudio(unittest.TestCase):
             "wav/cancelar.wav"
         ]
         iniciar(self.io)
+
+        random.seed(0)
+        possiveis_respostas = get_respostas("criar_aplicacao")
+        resposta1 = random.choice(possiveis_respostas)
+
+        possiveis_respostas = get_respostas("aplicar")
+        resposta2 = random.choice(possiveis_respostas)
+
         self.esperado.extend([
             "Diga o nome da aplicação",
-            "Criando aplicação viagem",
+            resposta1,
             self.que_fazer,
             "Diga o nome da aplicação",
             "Diga o valor",
-            "Aplicando 50 R$ em viagem",
+            resposta2,
             self.que_fazer
         ])
         self.assertEqual(self.io.impressoes, self.esperado)
