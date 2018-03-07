@@ -20,7 +20,7 @@ def reconhece_texto(io, cliente):
 
 
 def reconhece_voz(io, cliente):
-	segundos = 4
+	#segundos = 4
 	# escolhe o arquivo de audio apenas para teste
 	nome_arquivo = io.le("Nome do arquivo: ")
 

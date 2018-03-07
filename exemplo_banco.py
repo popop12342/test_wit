@@ -11,6 +11,7 @@ from intencoes.get_saldo import get_saldo
 from intencoes.pagar import pagar
 from intencoes.transferir import transferir
 from intencoes.repetir import repetir
+from intencoes.greetings import greetings_hello
 
 def iniciar(io):
 	cliente = Wit("EGYXBUP5MBO2C3FH67L6IP2JNZ3DLRCW")
@@ -46,6 +47,8 @@ def iniciar(io):
 				aplicar(io, msg_analizada, cliente, modo)
 			elif (intencao == "repetir"):
 				repetir(io=io, msg_analizada=msg_analizada, cliente=cliente, modo=modo)
+			elif (intencao == "greetings_hello"):
+				greetings_hello(io, msg_analizada)
 			else:
 				io.imprime("Não compreendi sua intenção")
 
