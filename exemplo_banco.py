@@ -27,7 +27,9 @@ def iniciar(io):
 		"pagar": Pagar,
 		"transferir": Transferir,
 		"criar_aplicacao": Criar_aplicacao,
-		"aplicar": Aplicar
+		"aplicar": Aplicar,
+		"cancelar_cartao": Intencao,
+		"desbloquear_cartao": Intencao
 	}
 
 	while (True):
