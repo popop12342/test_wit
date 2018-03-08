@@ -1,11 +1,10 @@
 # -*- coding: utf-8 -*-
 from conversas import carrega
-from intencoes.get_saldo import get_saldo
-from intencoes.pagar import pagar
-from intencoes.get_limite import get_limite
-from intencoes.transferir import transferir
-from intencoes.get_extrato import get_extrato
-from intencoes.aplicacao import criar, aplicar
+from intencoes.pagar import Pagar
+from intencoes.transferir import Transferir
+from intencoes.intencao import Intencao
+from intencoes.aplicar import Aplicar
+from intencoes.criar_aplicacao import Criar_aplicacao
 
 def repetir(io, msg_analizada, cliente, modo):
 	conversas = carrega()
@@ -14,16 +13,16 @@ def repetir(io, msg_analizada, cliente, modo):
 	intencao = ultima[u'entities'][u'intent'][0][u'value']
 
 	if (intencao == "get_saldo"):
-		get_saldo(io, ultima)
+		Intencao("get_saldo", io, msg_analizada).executa()
 	elif (intencao == "pagar"):
-		pagar(io, ultima)
+		Pagar(io, ultima).executa()
 	elif (intencao == "get_limite"):
-		get_limite(io, ultima)
+		Intencao("get_limite", io, msg_analizada).executa()
 	elif (intencao == "transferir"):
-		transferir(io, ultima, cliente, modo)
+		Transferir(io, ultima, cliente, modo).executa()
 	elif (intencao == "extrato"):
-		get_extrato(io, ultima)
+		Intencao("get_extrato", io, msg_analizada).executa()
 	elif (intencao == "criar_aplicacao"):
-		criar(io, ultima, cliente, modo)
+		Criar_aplicacao(io, ultima, cliente, modo).executa()
 	elif (intencao == "aplicar"):
-		aplicar(io, ultima, cliente, modo)
+		Aplicar(io, ultima, cliente, modo).executa()
