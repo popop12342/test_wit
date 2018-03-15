@@ -1,29 +1,29 @@
 # -*- coding: utf-8 -*-
 from conversas import carrega
-from intencoes.get_saldo import get_saldo
-from intencoes.pagar import pagar
-from intencoes.get_limite import get_limite
-from intencoes.transferir import transferir
-from intencoes.get_extrato import get_extrato
-from intencoes.aplicacao import criar, aplicar
+from intencoes.pagar import Pagar
+from intencoes.transferir import Transferir
+from intencoes.intencao import Intencao
+from intencoes.aplicar import Aplicar
+from intencoes.criar_aplicacao import Criar_aplicacao
 
-def repetir(io, msg_analizada, cliente, modo):
+def repetir(io, msg_analizada, cliente, modo, cm):
 	conversas = carrega()
 
 	ultima = conversas.pop()
 	intencao = ultima[u'entities'][u'intent'][0][u'value']
 
-	if (intencao == "get_saldo"):
-		get_saldo(io, ultima)
-	elif (intencao == "pagar"):
-		pagar(io, ultima)
-	elif (intencao == "get_limite"):
-		get_limite(io, ultima)
-	elif (intencao == "transferir"):
-		transferir(io, ultima, cliente, modo)
-	elif (intencao == "extrato"):
-		get_extrato(io, ultima)
-	elif (intencao == "criar_aplicacao"):
-		criar(io, ultima, cliente, modo)
-	elif (intencao == "aplicar"):
-		aplicar(io, ultima, cliente, modo)
+	intencoes = {
+		"get_saldo": Intencao, 
+		"get_limite": Intencao, 
+		"get_extrato": Intencao, 
+		"greetings_hello": Intencao,
+		"pagar": Pagar,
+		"transferir": Transferir,
+		"criar_aplicacao": Criar_aplicacao,
+		"aplicar": Aplicar,
+		"cancelar_cartao": Intencao,
+		"desbloquear_cartao": Intencao
+	}
+
+	if (intencao in intencoes):
+		intencoes[intencao](io=io, nome=intencao, msg_analizada=ultima, cliente=cliente, modo=modo, cm=cm).executa()

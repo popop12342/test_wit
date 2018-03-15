@@ -16,7 +16,7 @@ class TestCancelar(unittest.TestCase):
         self.assertEqual(self.io.impressoes, self.esperado)
 
     def test_cancelar_transferencia(self):
-        self.io.mensagens = [self.modo, "transferir", "cancelar", "canelar"]
+        self.io.mensagens = [self.modo, "transferir", "cancelar", "cancelar"]
         iniciar(self.io)
         self.esperado.extend(["Diga o número da conta", self.que_fazer])
         self.assertEqual(self.io.impressoes, self.esperado)

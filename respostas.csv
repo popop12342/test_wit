@@ -4,3 +4,7 @@ get_extrato,Mostrando extrato,Compra1: 20R$/ Compra2: 30R$
 criar_aplicacao,Criando aplicação @nome_aplicacao,Criando aplicação chamada @nome_aplicacao,A aplicação @nome_aplicacao foi criada
 aplicar,Aplicando @valor R$ em @nome_aplicacao,Realizando uma aplicação de valor @valor R$ em @nome_aplicacao,A aplicação @nome_aplicacao recebeu @valor R$
 transferir,Transferindo para a conta @numero_conta o valor @valor R$,Transferindo @valor R$ para @numero_conta,Transferindo @valor R$ para a conta @numero_conta
+greetings_hello,Olá,Saudações
+pagar,Fazendo pagamento agora,Pagando conta agora,Pagamento agendado para @datetime,Agendando pagamento para @datetime
+cancelar_cartao,Cancelando cartão,Cartão cancelado,Cancelamento de cartão feito
+desbloquear_cartao,Cartão desbloquado,Seu cartão já pode ser usado normalmente
