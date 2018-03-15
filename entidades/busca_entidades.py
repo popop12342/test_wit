@@ -15,10 +15,20 @@ def busca_entidades(principal, antiga, nova, entidades=[]):
 	return "nao encontrado"
 
 
-# Checa se o usuário quer utilizar um valor anterior
-def checa_anterior(valor, valor_padrao, msg_analizada, principal):
+def checa_anterior(valor, valor_padrao, entidade, cm, contexto):
 	if (valor == valor_padrao):
-		entidade = conversas.busca(principal)
-		msg_analizada[u'entities'][principal] = entidade
-		return entidade[0][u'value']
+		if (isinstance(contexto, list)):
+			for c in contexto:
+				v = cm.busca(c, entidade)
+				if (v != "nao encontrado"):
+					return v
+		else:
+			return cm.busca(contexto, entidade)
 	return valor
+# Checa se o usuário quer utilizar um valor anterior
+# def checa_anterior(valor, valor_padrao, msg_analizada, principal):
+	# if (valor == valor_padrao):
+	# 	entidade = conversas.busca(principal) 
+	# 	msg_analizada[u'entities'][principal] = entidade
+	# 	return entidade[0][u'value']
+	# return valor

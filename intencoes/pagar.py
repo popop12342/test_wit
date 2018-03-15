@@ -6,8 +6,8 @@ from intencoes.intencao import Intencao
 
 class Pagar(Intencao):
 
-	def __init__(self, io, msg_analizada, nome="pagar", cliente=None, modo="1"):
-		super().__init__(nome, io, msg_analizada)
+	def __init__(self, io, msg_analizada, cm, nome="pagar", cliente=None, modo="1"):
+		super().__init__(nome, io, msg_analizada, cm)
 
 	def executa(self):
 		respostas = get_respostas("pagar")

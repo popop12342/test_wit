@@ -12,20 +12,20 @@ class TestObterValor(unittest.TestCase):
 
     def test_valor_inicialmente_fornecido(self):
         msg_analizada = {'_text': ['aplique 40 reais em show'], 'entities': {'intent': [{'confidence': 0.99932068639867, 'value': 'aplicar'}], 'nome_aplicacao': [{'confidence': 0.89477890285309, 'value': 'show', 'type': 'value'}], 'amount_of_money': [{'confidence': 0.9666425, 'value': 40, 'type': 'value', 'unit': 'BRL'}]}, 'msg_id': '0BQc8Rbe7c8PF7Plq'}
-        valor = obter_valor(io=self.io, msg_analizada=msg_analizada, cliente=self.cliente, modo=self.modo)
+        valor = obter_valor(io=self.io, msg_analizada=msg_analizada, cliente=self.cliente, modo=self.modo, cm=None)
         self.assertEqual(valor, 40)
 
     def test_valor_nao_inicialmente_fornecido(self):
         msg_analizada = {'_text': ['aplique'], 'entities': {'intent': [{'confidence': 0.99932068639867, 'value': 'aplicar'}]}, 'msg_id': '0BQc8Rbe7c8PF7Plq'}
         self.io.mensagens = ["20 reais"]
-        valor = obter_valor(io=self.io, msg_analizada=msg_analizada, cliente=self.cliente, modo=self.modo)
+        valor = obter_valor(io=self.io, msg_analizada=msg_analizada, cliente=self.cliente, modo=self.modo, cm=None)
         self.assertEqual(valor, 20)
         self.assertEqual(self.io.impressoes[0], "Diga o valor")
 
     def test_valor_fornecido_futuramente(self):
         msg_analizada = {'_text': ['aplique'], 'entities': {'intent': [{'confidence': 0.99932068639867, 'value': 'aplicar'}]}, 'msg_id': '0BQc8Rbe7c8PF7Plq'}
         self.io.mensagens = ["qualquer", "nenhum", "60 reais"]
-        valor = obter_valor(io=self.io, msg_analizada=msg_analizada, cliente=self.cliente, modo=self.modo)
+        valor = obter_valor(io=self.io, msg_analizada=msg_analizada, cliente=self.cliente, modo=self.modo, cm=None)
         self.assertEqual(valor, 60)
         for impressao in self.io.impressoes:
             self.assertEqual(impressao, "Diga o valor")

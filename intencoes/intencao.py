@@ -6,10 +6,11 @@ from conversas import salva
 class Intencao:
 
 
-    def __init__(self, nome, io, msg_analizada, cliente=None, modo="1"):
+    def __init__(self, nome, io, msg_analizada, cm, cliente=None, modo="1"):
         self.nome = nome
         self.io = io
         self.msg_analizada = msg_analizada
+        self.cm = cm
 
     def executa(self):
         respostas = get_respostas(self.nome)

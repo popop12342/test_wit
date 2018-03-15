@@ -3,7 +3,7 @@ from reconhece import reconhece
 from entidades.busca_entidades import busca_entidades, checa_anterior
 import validacoes
 
-def obter_numero_conta(io, msg_analizada, cliente, modo):
+def obter_numero_conta(io, msg_analizada, cliente, modo, cm):
 	# Checa se o número da conta foi inicialmente fornecido
 	msg_analizada = numero_falado(msg_analizada, cliente, modo)
 	principal = u'numero_conta'
@@ -11,7 +11,7 @@ def obter_numero_conta(io, msg_analizada, cliente, modo):
 	numero_conta = busca_entidades(principal = principal, entidades = entidades, nova = msg_analizada, antiga = msg_analizada)
 
 	# Checa conta anterior
-	numero_conta = checa_anterior(numero_conta, "mesma conta", msg_analizada, principal)
+	numero_conta = checa_anterior(valor=numero_conta, valor_padrao="mesma conta", entidade=principal, cm=cm, contexto="transferencia")
 
 	# Se o numero não foi inicialment fornecido
 	while (numero_conta == "nao encontrado"):
@@ -20,7 +20,7 @@ def obter_numero_conta(io, msg_analizada, cliente, modo):
 		msg_analizada_numero_conta = numero_falado(msg_analizada_numero_conta, cliente, modo)
 		validacoes.cancelar_check(msg_analizada_numero_conta)
 		numero_conta = busca_entidades(principal = principal, entidades = entidades, nova = msg_analizada_numero_conta, antiga = msg_analizada)
-		numero_conta = checa_anterior(numero_conta, "mesma conta", msg_analizada, principal)
+		numero_conta = checa_anterior(valor=numero_conta, valor_padrao="mesma conta", entidade=principal, cm=cm, contexto="transferencia")
 
 	return numero_conta
 

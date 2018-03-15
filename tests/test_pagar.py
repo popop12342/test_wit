@@ -48,7 +48,7 @@ class TestPagar(unittest.TestCase):
         resposta = random.choice(self.possiveis_respostas)
 
         amanha = datetime.date.today() + datetime.timedelta(days=1)
-        data = "20{}T00:00:00.000-08:00".format(amanha.strftime("%y-%m-%d"))
+        data = "20{}T00:00:00.000-07:00".format(amanha.strftime("%y-%m-%d"))
         self.esperado.append(resposta.replace("@datetime", data))
         self.esperado.append(self.que_fazer)
         self.assertEqual(self.io.impressoes, self.esperado)

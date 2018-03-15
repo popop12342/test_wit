@@ -10,9 +10,12 @@ from intencoes.repetir import repetir
 from intencoes.intencao import Intencao
 from intencoes.aplicar import Aplicar
 from intencoes.criar_aplicacao import Criar_aplicacao
+from contextos.contexto_manager import ContextoManager
 
 def iniciar(io):
 	cliente = Wit("EGYXBUP5MBO2C3FH67L6IP2JNZ3DLRCW")
+
+	cm = ContextoManager()
 
 	io.imprime("Escolha a forma de interação:")
 	io.imprime("1) texto")
@@ -42,13 +45,15 @@ def iniciar(io):
 			
 
 			if (intencao in intencoes):
-				intencoes[intencao](nome=intencao, io=io, msg_analizada=msg_analizada, cliente=cliente, modo=modo).executa()
+				intencoes[intencao](nome=intencao, io=io, msg_analizada=msg_analizada, cliente=cliente, modo=modo, cm=cm).executa()
 			elif (intencao == "cancelar"):
 				break
 			elif (intencao == "repetir"):
-				repetir(io=io, msg_analizada=msg_analizada, cliente=cliente, modo=modo)
+				repetir(io=io, msg_analizada=msg_analizada, cliente=cliente, modo=modo, cm=cm)
 			else:
 				io.imprime("Não compreendi sua intenção")
+
+			cm.atualiza()
 
 		except Cancelar.Cancelar:
 			continue

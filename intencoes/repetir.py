@@ -6,7 +6,7 @@ from intencoes.intencao import Intencao
 from intencoes.aplicar import Aplicar
 from intencoes.criar_aplicacao import Criar_aplicacao
 
-def repetir(io, msg_analizada, cliente, modo):
+def repetir(io, msg_analizada, cliente, modo, cm):
 	conversas = carrega()
 
 	ultima = conversas.pop()
@@ -26,4 +26,4 @@ def repetir(io, msg_analizada, cliente, modo):
 	}
 
 	if (intencao in intencoes):
-		intencoes[intencao](io=io, nome=intencao, msg_analizada=ultima, cliente=cliente, modo=modo).executa()
+		intencoes[intencao](io=io, nome=intencao, msg_analizada=ultima, cliente=cliente, modo=modo, cm=cm).executa()
